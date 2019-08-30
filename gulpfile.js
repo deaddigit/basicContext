@@ -15,21 +15,22 @@ var catchError = function(err) {
 
 gulp.task('styles', function() {
 
+	// Ugly
 	gulp.src('./src/styles/main.scss')
 	    .pipe(plugins.sass())
 	    .on('error', catchError)
 	    .pipe(plugins.concat(name + '.min.css', { newLine: "\n" }))
 	    .pipe(plugins.autoprefixer('last 2 version', '> 1%'))
 	    .pipe(plugins.minifyCss())
-	    .pipe(gulp.dest('./dist'))
+	    .pipe(gulp.dest('./dist/styles/ugly/'))
 
-	gulp.src('./src/styles/themes/*.scss')
+	gulp.src('./src/styles/ugly/themes/*.scss')
 	    .pipe(plugins.sass())
 	    .on('error', catchError)
 	    .pipe(plugins.rename(function(path) { path.basename += '.min' }))
 	    .pipe(plugins.autoprefixer('last 2 version', '> 1%'))
 	    .pipe(plugins.minifyCss())
-	    .pipe(gulp.dest('./dist/themes'))
+	    .pipe(gulp.dest('./dist/styles/ugly/themes'))
 
 	gulp.src('./src/styles/addons/*.scss')
 	    .pipe(plugins.sass())
@@ -37,23 +38,57 @@ gulp.task('styles', function() {
 	    .pipe(plugins.rename(function(path) { path.basename += '.min' }))
 	    .pipe(plugins.autoprefixer('last 2 version', '> 1%'))
 	    .pipe(plugins.minifyCss())
-	    .pipe(gulp.dest('./dist/addons'))
+	    .pipe(gulp.dest('./dist/styles/ugly/addons'))
 
+
+	// Pretty
+	gulp.src('./src/styles/main.scss')
+		.pipe(plugins.sass())
+		.on('error', catchError)
+		.pipe(plugins.concat(name + '.css', { newLine: "\n" }))
+		.pipe(plugins.autoprefixer('last 2 version', '> 1%'))
+		.pipe(gulp.dest('./dist/styles/pretty'))
+
+	gulp.src('./src/styles/themes/*.scss')
+		.pipe(plugins.sass())
+		.on('error', catchError)
+		.pipe(plugins.rename(function(path) { path.basename += '.css' }))
+		.pipe(plugins.autoprefixer('last 2 version', '> 1%'))
+		.pipe(gulp.dest('./dist/styles/pretty/themes'))
+
+	gulp.src('./src/styles/addons/*.scss')
+		.pipe(plugins.sass())
+		.on('error', catchError)
+		.pipe(plugins.rename(function(path) { path.basename += '.css' }))
+		.pipe(plugins.autoprefixer('last 2 version', '> 1%'))
+		.pipe(gulp.dest('./dist/styles/pretty/addons'))
 })
 
 gulp.task('scripts', function() {
-
+	// Ugly
 	gulp.src('./src/scripts/*.js')
-	    .pipe(plugins.header(head, { name: name }))
-	    .pipe(plugins.footer(foot))
-	    .pipe(plugins.babel())
-	    .on('error', catchError)
-	    .pipe(plugins.concat(name + '.min.js', { newLine: "\n" }))
-	    .pipe(plugins.uglify())
-	    .on('error', catchError)
-	    .pipe(gulp.dest('./dist'))
+		.pipe(plugins.header(head, { name: name }))
+		.pipe(plugins.footer(foot))
+		.pipe(plugins.babel())
+		.on('error', catchError)
+		.pipe(plugins.concat(name + '.min.js', { newLine: "\n" }))
+		.pipe(plugins.uglify())
+		.on('error', catchError)
+		.pipe(gulp.dest('./dist/scripts/ugly'))
 
+	// Pretty
+	gulp.src('./src/scripts/*.js')
+		.pipe(plugins.header(head, { name: name }))
+		.pipe(plugins.footer(foot))
+		.pipe(plugins.babel())
+		.on('error', catchError)
+		.pipe(plugins.concat(name + '.js', { newLine: "\n" }))
+		.on('error', catchError)
+		.pipe(gulp.dest('./dist/scripts/pretty'))
 })
+
+
+
 
 gulp.task('default', ['styles', 'scripts'])
 

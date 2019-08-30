@@ -1,8 +1,9 @@
 let overflow = null
 
 const ITEM      = 'item',
-      SEPARATOR = 'separator'
-
+	  SEPARATOR = 'separator',
+	  HEADER = 'header'
+	  
 const dom = function(elem = '') {
 
 	return document.querySelector('.basicContext ' + elem)
@@ -12,9 +13,12 @@ const dom = function(elem = '') {
 const valid = function(item = {}) {
 
 	let emptyItem = (Object.keys(item).length===0 ? true : false)
-
+	// Setting the type
 	if (emptyItem===true)     item.type    = SEPARATOR
+	if (item.type == 'header')  item.Type    = HEADER
 	if (item.type==null)      item.type    = ITEM
+
+	// Other properties
 	if (item.class==null)     item.class   = ''
 	if (item.visible!==false) item.visible = true
 	if (item.icon==null)      item.icon    = null
@@ -26,7 +30,7 @@ const valid = function(item = {}) {
 
 	// Item requires a function when
 	// it's not a separator and not disabled
-	if (item.fn==null && item.type!==SEPARATOR && item.disabled===false) {
+	if (item.fn==null && item.type!==SEPARATOR && item.type!==HEADER && item.disabled===false) {
 
 		console.warn(`Missing fn for item '${ item.title }'`)
 		return false
@@ -67,6 +71,12 @@ const buildItem = function(item, num) {
 
 		html = `
 		       <tr class='basicContext__item basicContext__item--separator'></tr>
+		       `
+
+	} else if (item.type===HEADER) {
+
+		html = `
+		       <tr class='basicContext__item basicContext__item--header'> <td class="basicContext__item--header-text" style="color: ${(item.color) ? item.color : "black" }"> ${item.title} </td></tr>
 		       `
 
 	}
