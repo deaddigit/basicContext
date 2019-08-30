@@ -1,4 +1,4 @@
-# [Deprecated] basicContext
+# basicContext
 
 Easy-to-use context-menu for your website or web-app.
 
