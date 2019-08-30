@@ -81,6 +81,7 @@ Show a context-menu by using the following command:
 document.querySelector('.btn').addEventListener('click', function(e) {
 
 	let items = [
+		{ type: 'header', color: 'black', title: 'Heading' },
 		{ title: 'Add Sites', icon: 'ion-plus-round', fn: clicked },
 		{ title: 'Reset Login', icon: 'ion-person', fn: clicked },
 		{ title: 'Help', icon: 'ion-help-buoy', fn: clicked },
