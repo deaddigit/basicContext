@@ -43,11 +43,11 @@ gulp.task('styles', function() {
 
 	// Pretty
 	gulp.src('./src/styles/main.scss')
-	.pipe(plugins.sass())
-	.on('error', catchError)
-	.pipe(plugins.concat(name + '.css', { newLine: "\n" }))
-	.pipe(plugins.autoprefixer('last 2 version', '> 1%'))
-	.pipe(gulp.dest('./dist/styles/pretty'))
+		.pipe(plugins.sass())
+		.on('error', catchError)
+		.pipe(plugins.concat(name + '.css', { newLine: "\n" }))
+		.pipe(plugins.autoprefixer('last 2 version', '> 1%'))
+		.pipe(gulp.dest('./dist/styles/pretty'))
 
 	gulp.src('./src/styles/themes/*.scss')
 		.pipe(plugins.sass())
@@ -67,24 +67,24 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
 	// Ugly
 	gulp.src('./src/scripts/*.js')
-	    .pipe(plugins.header(head, { name: name }))
-	    .pipe(plugins.footer(foot))
-	    .pipe(plugins.babel())
-	    .on('error', catchError)
-	    .pipe(plugins.concat(name + '.min.js', { newLine: "\n" }))
-	    .pipe(plugins.uglify())
-	    .on('error', catchError)
+		.pipe(plugins.header(head, { name: name }))
+		.pipe(plugins.footer(foot))
+		.pipe(plugins.babel())
+		.on('error', catchError)
+		.pipe(plugins.concat(name + '.min.js', { newLine: "\n" }))
+		.pipe(plugins.uglify())
+		.on('error', catchError)
 		.pipe(gulp.dest('./dist/scripts/ugly'))
 
 	// Pretty
 	gulp.src('./src/scripts/*.js')
-	.pipe(plugins.header(head, { name: name }))
-	.pipe(plugins.footer(foot))
-	.pipe(plugins.babel())
-	.on('error', catchError)
-	.pipe(plugins.concat(name + '.js', { newLine: "\n" }))
-	.on('error', catchError)
-	.pipe(gulp.dest('./dist/scripts/pretty'))
+		.pipe(plugins.header(head, { name: name }))
+		.pipe(plugins.footer(foot))
+		.pipe(plugins.babel())
+		.on('error', catchError)
+		.pipe(plugins.concat(name + '.js', { newLine: "\n" }))
+		.on('error', catchError)
+		.pipe(gulp.dest('./dist/scripts/pretty'))
 })
 
 

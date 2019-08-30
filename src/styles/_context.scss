@@ -19,6 +19,16 @@
 			height: 1px;
 			cursor: default;
 		}
+		&--header {
+			text-align: left;
+			color: black;
+			border-bottom: .1rem solid #e0e0e0;
+			&-text {
+				font-size: .9rem;
+				padding: 6px 8px;
+				text-align: center;
+			}
+		}
 
 		&--disabled {
 			cursor: default;
